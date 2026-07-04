@@ -11,7 +11,7 @@
     <main class="page document">
       <p class="eyebrow">Health for Agents</p>
       <h1>Privacy Policy</h1>
-      <p class="updated">Effective date: June 16, 2026</p>
+      <p class="updated">Effective date: July 4, 2026</p>
 
       <p>
         Health for Agents is designed to keep users in control of their Apple Health data. The app reads
@@ -33,6 +33,20 @@
         data to an AI agent API endpoint configured by the user.
       </p>
 
+      <h2>What can be sent to an agent endpoint</h2>
+      <p>
+        If the user chooses Send to Agent, the app sends only the selected recent range: 24 Hours, 7 Days, or
+        30 Days. The JSON payload can include HealthKit sample identifiers, sample type identifiers, start and
+        end dates, numeric or category values, units, text values, metadata when present, export metadata such as
+        schemaVersion, generatedAt, scope, and source, and a short instruction asking the receiving agent to
+        analyze trends and avoid medical diagnosis.
+      </p>
+
+      <p>
+        If the user saved an API bearer token in the app, the token is sent only as an Authorization header to
+        the configured endpoint. The bearer token is not included inside the JSON HealthKit export.
+      </p>
+
       <h2>Local storage and exports</h2>
       <p>
         Export files are created locally on the user's device. Old exports are deleted automatically when the app
@@ -43,9 +57,18 @@
 
       <h2>Sending data to an AI agent</h2>
       <p>
-        The app can send recent HealthKit data to an API endpoint entered by the user. The app does not provide,
-        operate, or control that endpoint. Before using this feature, users should make sure they trust the API
-        provider and understand how that provider will process, store, and protect the data.
+        The app can send recent HealthKit data to an HTTPS API endpoint entered by the user. Health for Agents
+        does not include, operate, select, or control a third-party AI service or developer-operated backend. The
+        recipient is the exact endpoint URL entered by the user. Before an in-app Send to Agent transfer, the app
+        shows a review screen that identifies the recipient URL, explains the categories of HealthKit data being
+        sent, and asks the user to confirm the transfer.
+      </p>
+
+      <p>
+        If the user-configured endpoint forwards data to an AI provider, stores the data, logs the data, or shares
+        the data with another service, that behavior is controlled by the endpoint owner, not by Health for Agents.
+        Users should only send health data to endpoints and AI services they control or trust, and whose privacy
+        and security practices provide appropriate protection for sensitive health data.
       </p>
 
       <p>
@@ -55,9 +78,11 @@
 
       <h2>Shortcuts automations</h2>
       <p>
-        Users may configure Apple Shortcuts to trigger a health update. When this is configured, the shortcut uses
-        the saved endpoint, selected time range, and bearer token from the app settings. Whether an automation runs
-        depends on iOS Shortcuts behavior and the user's device settings.
+        Users may configure Apple Shortcuts to trigger a health update. Before saving Shortcut settings in the
+        app, Health for Agents shows a review screen explaining that future Shortcuts can send HealthKit samples
+        from the saved range to the saved endpoint. When a Shortcut runs, it uses the saved endpoint, selected
+        time range, and bearer token from the app settings. Whether an automation runs depends on iOS Shortcuts
+        behavior and the user's device settings.
       </p>
 
       <h2>No tracking or advertising</h2>
