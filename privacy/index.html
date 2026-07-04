@@ -78,11 +78,13 @@
 
       <h2>Shortcuts automations</h2>
       <p>
-        Users may configure Apple Shortcuts to trigger a health update. Before saving Shortcut settings in the
-        app, Health for Agents shows a review screen explaining that future Shortcuts can send HealthKit samples
-        from the saved range to the saved endpoint. When a Shortcut runs, it uses the saved endpoint, selected
-        time range, and bearer token from the app settings. Whether an automation runs depends on iOS Shortcuts
-        behavior and the user's device settings.
+        Users may configure Apple Shortcuts to trigger a health update. Before saving Shortcut automation settings
+        in the app, Health for Agents shows a one-time review screen explaining that future Shortcuts can send
+        HealthKit samples from the saved range to the saved endpoint, including from user-created automations.
+        Shortcut runs do not show an in-app confirmation every time. When a Shortcut runs, it uses the saved
+        endpoint, selected time range, and bearer token from the app settings. If the endpoint or range changes,
+        the user must save and approve the automation settings again. Whether an automation runs depends on iOS
+        Shortcuts behavior and the user's device settings.
       </p>
 
       <h2>No tracking or advertising</h2>
