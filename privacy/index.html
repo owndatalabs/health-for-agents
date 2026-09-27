@@ -11,7 +11,7 @@
     <main class="page document">
       <p class="eyebrow">Health for Agents</p>
       <h1>Privacy Policy</h1>
-      <p class="updated">Effective date: July 4, 2026</p>
+      <p class="updated">Effective date: September 27, 2026 (version 1.1)</p>
 
       <p>
         Health for Agents is designed to keep users in control of their Apple Health data. The app reads
@@ -23,7 +23,19 @@
       <p>
         With the user's explicit permission, Health for Agents can read health and fitness data from Apple
         HealthKit. This may include sensitive information such as activity, workouts, sleep, heart rate, body
-        measurements, nutrition, and other HealthKit records that are available on the user's device.
+        measurements (including body fat), nutrition, reproductive health, and mental-health records.
+        Depending on permissions, device support and iOS version, exports may also contain ECG measurements,
+        heartbeat series, precise GPS locations from workout routes, hearing tests, clinical records (including
+        diagnoses, allergies, laboratory results, medications, immunizations, insurance details and medical notes),
+        and individually selected vision prescriptions. The app reads existing workout routes from HealthKit;
+        it does not record live location.
+      </p>
+      <p>
+        Current profile information may include date of birth, biological sex, blood type, skin type,
+        wheelchair use and activity move mode. Daily activity summaries may also be exported.
+        Access is optional and controlled through Health permissions. The app cannot distinguish a denied
+        read permission from an absence of records. Medication tracking and dose events, CDA documents and
+        attachments are not supported by this version. An export is not a complete Apple Health backup.
       </p>
 
       <h2>How Health data is used</h2>
@@ -33,13 +45,36 @@
         data to an AI agent API endpoint configured by the user.
       </p>
 
+      <h2>Legal basis and consent (GDPR)</h2>
+      <p>
+        Where the GDPR applies and consent is the applicable basis for the health-data processing described
+        here, we rely on consent under Article 6(1)(a) and explicit consent under Article 9(2)(a).
+        HealthKit permissions control which records the app may read. Separately, the app asks for confirmation
+        before an in-app agent transfer or approval of future Shortcut transfers. Granting HealthKit access
+        alone does not authorize sending data to an endpoint.
+      </p>
+      <p>
+        You can withdraw permission for future access through Apple Health or iOS Settings and disable your
+        Shortcut automations to stop scheduled sends. Withdrawal does not affect the lawfulness of processing
+        before withdrawal and does not recall files or data already sent to another recipient.
+        An endpoint operator is responsible for its own processing and applicable legal basis.
+      </p>
+
       <h2>What can be sent to an agent endpoint</h2>
       <p>
-        If the user chooses Send to Agent, the app sends only the selected recent range: 24 Hours, 7 Days, or
+        For Send to Agent, sample records are selected from 24 Hours, 7 Days, or
         30 Days. The JSON payload can include HealthKit sample identifiers, sample type identifiers, start and
         end dates, numeric or category values, units, text values, metadata when present, export metadata such as
         schemaVersion, generatedAt, scope, and source, and a short instruction asking the receiving agent to
         analyze trends and avoid medical diagnosis.
+      </p>
+      <p>
+        Structured details can include the sensitive data listed above, source app and device information,
+        and clinical FHIR record contents. Coverage information lists queried, empty, excluded or failed types.
+        Current profile characteristics are included as a separate context snapshot when readable; they are
+        not limited to measurements recorded within the chosen time range. Activity summaries have calendar-day
+        granularity and may include a full day that overlaps a selected range. File exports additionally support
+        All Time. Debug previews are limited to 24 hours and 500 samples.
       </p>
 
       <p>
@@ -53,6 +88,11 @@
         starts, and users can manually delete existing exports from inside the app. When a user shares or saves an
         export through iOS, the user chooses the destination and is responsible for what happens to that exported
         file afterward.
+      </p>
+      <p>
+        API uploads use a temporary JSON file protected by iOS file protection. The app attempts to delete it
+        when the upload operation ends, including on handled errors. This cleanup may not execute if iOS
+        terminates the app. Copies saved or shared outside the app are not deleted by its export cleanup.
       </p>
 
       <h2>Sending data to an AI agent</h2>
@@ -68,7 +108,11 @@
         If the user-configured endpoint forwards data to an AI provider, stores the data, logs the data, or shares
         the data with another service, that behavior is controlled by the endpoint owner, not by Health for Agents.
         Users should only send health data to endpoints and AI services they control or trust, and whose privacy
-        and security practices provide appropriate protection for sensitive health data.
+        and security practices provide the same or equal protection for sensitive health data. The app cannot
+        verify arbitrary user-supplied endpoints or guarantee their practices. Do not approve a destination
+        unless you have checked its privacy policy, retention, deletion and downstream sharing practices.
+        A destination may process data in another country, including outside the EEA; its operator is responsible
+        for applicable transfer safeguards. No endpoint or third-party AI provider is selected by the developer.
       </p>
 
       <p>
@@ -86,6 +130,11 @@
         the user must save and approve the automation settings again. Whether an automation runs depends on iOS
         Shortcuts behavior and the user's device settings.
       </p>
+      <p>
+        Version 1.1 expands the data categories. Users must review Health permissions and approve their saved
+        Shortcut settings again before automated sends using the expanded scope. Subsequent runs do not require
+        a new in-app confirmation for each transfer to the approved endpoint and range.
+      </p>
 
       <h2>No tracking or advertising</h2>
       <p>
@@ -95,9 +144,27 @@
 
       <h2>Data retention and deletion</h2>
       <p>
-        The app keeps only the local settings needed to operate, such as HealthKit access state, the configured API
-        endpoint, selected shortcut range, and the optional bearer token in Keychain. Users can remove exported
-        files from inside the app. Users can revoke HealthKit access at any time in the iOS Settings app.
+        The app stores local settings, including HealthKit authorization state, the configured API endpoint,
+        selected Shortcut range and saved transfer approval. The optional bearer token is stored in Keychain
+        and can be removed in Settings. A local sync history contains timestamps and status messages, such as
+        counts and error information, and can be cleared in Sync History. Local settings and history remain
+        until cleared or removed through the relevant app or system controls. Keychain entries may survive
+        uninstalling the app; remove the token using the app's control when you no longer need it.
+        Deleting exports does not delete the original records in Apple Health or copies held by recipients.
+      </p>
+
+      <h2>Your rights (GDPR)</h2>
+      <p>
+        Where applicable, you may request access, correction, erasure, restriction or portability of your
+        personal data, object to processing, and withdraw consent. These rights depend on the processing
+        and applicable legal conditions. You may also complain to a data protection supervisory authority.
+      </p>
+      <p>
+        The developer does not receive or hold your HealthKit exports on a developer-operated server.
+        Manage original records and permissions in Apple Health, delete local exports and sync history in
+        the app, and disable automations you no longer want. For data already shared, contact the recipient
+        to exercise your rights over its copies. Contact us below for privacy requests concerning data we
+        actually receive, such as support correspondence. You do not need to send health records with a request.
       </p>
 
       <h2>User responsibility after export or transfer</h2>
@@ -126,33 +193,24 @@
         changes are made.
       </p>
 
+      <h2>Not a medical device</h2>
+      <p>
+        Health for Agents is a technical data export utility. It does not offer medical advice, diagnosis or
+        treatment and is not intended to replace professional medical judgment.
+      </p>
+
       <h2>Contact</h2>
       <p>
-        For privacy questions or support, contact: <a href="mailto:owndatalabs+support@gmail.com">owndatalabs+support@gmail.com</a>
+        Health for Agents is provided by Sebastian Philipp Brabetz (OwnData Labs).
+        For privacy questions or support, contact: <a href="mailto:owndatalabs+support@gmail.com">owndatalabs+support@gmail.com</a>.
       </p>
-      <h2>Legal Basis (GDPR)</h2>
       <p>
-        The processing of your HealthKit data is based strictly on your explicit consent 
-        (Art. 6(1)(a) and Art. 9(2)(a) GDPR), which you grant when allowing HealthKit 
-        permissions in iOS and triggering an export or setting up an automated transfer. 
-        You can revoke your consent at any time by disabling HealthKit access for this app in the iOS Settings.
-      </p>
-
-      <h2>Your Rights</h2>
-      <p>
-        Under applicable data protection laws (such as the GDPR), you have the right to access, 
-        rectify, or request the erasure of your personal data. Because Health for Agents does not 
-        store or transmit your data to any developer servers, all health data remains on your device. 
-        You can exercise your rights directly by deleting exported files in the app, clearing app settings, 
-        or removing the app from your device. You also have the right to lodge a complaint with a 
-        data protection supervisory authority.
-      </p>
-
-      <h2>Not a Medical Device</h2>
-      <p>
-        Health for Agents is purely a technical data export utility. It is not a medical device, 
-        does not offer medical advice, diagnosis, or treatment, and is not intended to replace 
-        professional medical judgment.
+        If you email support, we receive your email address and the content you send through our email provider,
+        Gmail. We use that information to answer your request, not to collect HealthKit records.
+        Please avoid sending sensitive health data or bearer tokens. Where the GDPR applies, ordinary support
+        correspondence is processed as necessary to respond to your service request (Article 6(1)(b)) or for
+        our legitimate interest in handling other enquiries (Article 6(1)(f)). Correspondence is kept only as
+        needed to handle the enquiry and any applicable retention obligations.
       </p>
     </main>
   </body>
